@@ -12,7 +12,10 @@ from django.template.defaultfilters import title
 from django.views import View
 from django.views.generic import TemplateView
 from info_app.models import Person
-
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView, ListView
+from .models import Person
+from .forms import PersonForm
 
 class WelcomeView(View):
     def get(self, request):
@@ -77,13 +80,23 @@ class AboutTemplateView(TemplateView):
         context['site_ano'] = '2025'
         return context
 
-class PersonView(View):
-    def get(self, request):
-        people = Person.objects.all()
-        data = [{'name': p.name, 'age': p.age} for p in people]
-        return JsonResponse({'Person': data})
 
+class PersonListView(ListView):
+    model = Person
+    template_name = 'info_app/person_list.html'
+    context_object_name = 'people'
 
+class PersonCreateView(CreateView):
+    model = Person
+    form_class = PersonForm
+    template_name = 'info_app/person_form.html'
+    success_url = reverse_lazy('people')
+
+class PersonUpdateView(UpdateView):
+    model = Person
+    form_class = PersonForm
+    template_name = 'info_app/person_form.html'
+    success_url = reverse_lazy('people')
 
 
 
