@@ -1,5 +1,6 @@
 from django import forms
 from .models import Person
+from django import forms
 
 class PersonForm(forms.ModelForm):
     class Meta:
@@ -27,3 +28,17 @@ class PersonForm(forms.ModelForm):
         if age < 0:
             raise forms.ValidationError('A idade não pode ser negativa.')
         return age
+    
+
+class FeedbackForm(forms.Form):
+    feedback = [
+        ('Excelente', 'Excelente'),
+        ('Bom', 'Bom'),
+        ('Regular', 'Regular'),
+        ('Ruim', 'Ruim'),
+    ]
+
+    nome = forms.CharField(label='Nome', max_length=100)
+    email = forms.EmailField(label='E-mail')
+    comentario = forms.CharField(label='Comentário', widget=forms.Textarea)
+    satisfacao = forms.ChoiceField(label='Satisfação', choices=feedback)

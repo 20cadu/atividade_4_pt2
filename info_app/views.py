@@ -1,8 +1,5 @@
-from symtable import Class
 
 from django.shortcuts import render
-import platform
-import socket
 from http.client import responses
 from platform import python_version
 import datetime
@@ -15,7 +12,7 @@ from info_app.models import Person
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
 from .models import Person
-from .forms import PersonForm
+from .forms import PersonForm, FeedbackForm
 
 class WelcomeView(View):
     def get(self, request):
@@ -98,5 +95,18 @@ class PersonUpdateView(UpdateView):
     template_name = 'info_app/person_form.html'
     success_url = reverse_lazy('people')
 
+
+def feedback_view(request):
+    mensagem = None
+    if request.method == 'POST':
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            nome = form.cleaned_data['nome']
+            satisfacao = form.cleaned_data['satisfacao']
+            mensagem = f'Obrigado pelo feedback, {nome}! Sua satisfação: {satisfacao}.'
+            return render(request, 'feedback/feedback.html', {'mensagem': mensagem})
+    else:
+        form = FeedbackForm()
+    return render(request, 'feedback/feedback.html', {'form': form, 'mensagem': mensagem})
 
 

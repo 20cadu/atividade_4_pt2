@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Feedback</title>
+</head>
+<body>
+    <h1>Formulário de Feedback</h1>
+    {% if mensagem %}
+        <p>{{ mensagem }}</p>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enviar</button>
+        </form>
+        {% if form.errors %}
+            <div>
+                {{ form.errors }}
+            </div>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

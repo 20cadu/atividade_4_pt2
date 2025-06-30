@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from info_app.views import WelcomeView, GoodbyeView, TimeView, GreetView, AgeCategoryView, SumView1, AboutTemplateView, PersonListView, PersonCreateView, PersonUpdateView
+from info_app.views import WelcomeView, GoodbyeView, TimeView, GreetView, AgeCategoryView, SumView1, AboutTemplateView, PersonListView, PersonCreateView, PersonUpdateView, feedback_view
 
 
 urlpatterns = [
@@ -15,4 +15,5 @@ urlpatterns = [
     path('people/', PersonListView.as_view(), name='people'),
     path('people-new/', PersonCreateView.as_view(), name='people-new'),
     path('people-edit/<int:pk>', PersonUpdateView.as_view(), name='people-edit'),
+    path('feedback/', feedback_view, name='feedback'),
 ]
