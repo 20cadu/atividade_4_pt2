@@ -104,9 +104,9 @@ def feedback_view(request):
             nome = form.cleaned_data['nome']
             satisfacao = form.cleaned_data['satisfacao']
             mensagem = f'Obrigado pelo feedback, {nome}! Sua satisfação: {satisfacao}.'
-            return render(request, 'feedback/feedback.html', {'mensagem': mensagem})
+            return render(request, 'info_app/feedback.html', {'mensagem': mensagem})
     else:
         form = FeedbackForm()
-    return render(request, 'feedback/feedback.html', {'form': form, 'mensagem': mensagem})
+    return render(request, 'info_app/feedback.html', {'form': form, 'mensagem': mensagem})
 
 
