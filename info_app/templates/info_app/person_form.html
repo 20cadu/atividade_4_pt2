@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>{% if object %}Editar{% else %}Cadastrar{% endif %} Pessoa</title>
+</head>
+<body>
+    <h1>{% if object %}Editar{% else %}Cadastrar{% endif %} Pessoa</h1>
+    <form id='person-form' class='form' method="post">
+        {% csrf_token %}
+        {{ form.as_div }}
+            <div>
+
+            </div>
+
+        <button type="submit">Salvar</button>
+    </form>
+    <a href="{% url 'people' %}">Voltar para a listagem de Pessoas</a>
+</body>
+
+</html>
