@@ -1,2 +1,2 @@
-# atividade_4_pt2
-📚 Atividade de Casa — Banco de dados (parte 2)
+# atividade_4_pt1
+📚 Atividade de Casa — Banco de dados (parte 1
