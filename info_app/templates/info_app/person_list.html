@@ -7,10 +7,20 @@
     <h1>Lista de Pessoas</h1>
     <ul>
         {% for person in people %}
-            <li>{{ person.name }} ({{ person.age }} anos)</li>
+            <li>{{ person.name }} ({{ person.age }} anos, gênero: {{ person.gender }})</li>
         {% empty %}
             <li>Nenhuma pessoa cadastrada.</li>
         {% endfor %}
     </ul>
+
+    <form method="get">
+        <p>Filtros:</p>
+        <select name="gender">
+            <option value="Male">Masculino</option>
+            <option value="Female">Feminino</option>
+            <option value="Others">Outros</option>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
 </body>
 </html>

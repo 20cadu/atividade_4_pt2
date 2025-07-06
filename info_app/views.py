@@ -83,6 +83,13 @@ class PersonListView(ListView):
     template_name = 'info_app/person_list.html'
     context_object_name = 'people'
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        gender = self.request.GET.get('gender')
+        if gender:
+            queryset = queryset.filter(gender=gender)
+        return queryset
+
 class PersonCreateView(CreateView):
     model = Person
     form_class = PersonForm

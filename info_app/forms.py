@@ -5,10 +5,13 @@ from django import forms
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ['name', 'age']
+        fields = ['name', 'age', 'gender','email']
+
         labels = {
             'name': 'Nome',
             'age': 'Idade',
+            'gender': 'Gênero',
+            'email': 'E-mail'
         }
         
     def clean_name(self):
