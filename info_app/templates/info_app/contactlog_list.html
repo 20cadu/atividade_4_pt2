@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Lista de Mensagens</title>
+</head>
+<body>
+    <h1>Mensagens</h1>
+
+    <ul>
+      {% for contact in contactlog %}
+        <li>{{ contact.person }} - {{ contact.message }} (Enviado em: {{ contact.timestamp }}) </li>
+      {% empty %}
+        <li>Nenhum contato encontrado.</li>
+      {% endfor %}
+    </ul>
+
+    <form method="get">
+        <p>Filtros:</p>
+        <select name="gender">
+            <option value="Male">Masculino</option>
+            <option value="Female">Feminino</option>
+            <option value="Others">Outros</option>
+        </select>
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <br>
+
+    <a href="{% url 'contactlog-new' %}">Mandar uma mensagem a um usuário</a>
+</body>
+</html>

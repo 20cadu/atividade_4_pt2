@@ -3,7 +3,7 @@ from django.shortcuts import render
 from http.client import responses
 from platform import python_version
 import datetime
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.template.context_processors import request
 from django.template.defaultfilters import title
 from django.views import View
@@ -11,8 +11,8 @@ from django.views.generic import TemplateView
 from info_app.models import Person
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, ListView
-from .models import Person
-from .forms import PersonForm, FeedbackForm
+from .models import Person, ContactLog
+from .forms import PersonForm, FeedbackForm, ContactLogForm
 
 class WelcomeView(View):
     def get(self, request):
@@ -90,6 +90,7 @@ class PersonListView(ListView):
             queryset = queryset.filter(gender=gender)
         return queryset
 
+
 class PersonCreateView(CreateView):
     model = Person
     form_class = PersonForm
@@ -116,4 +117,24 @@ def feedback_view(request):
         form = FeedbackForm()
     return render(request, 'info_app/feedback.html', {'form': form, 'mensagem': mensagem})
 
+class ContactLogCreateView(CreateView):
+    model = ContactLog
+    form_class = ContactLogForm
+    template_name = 'info_app/contactlog.html'
+    success_url = reverse_lazy('contactlog-list')
+
+    def form_valid(self, form):
+        print("Form válido, salvando...")
+        response = super().form_valid(form)
+        print("Objeto criado:", self.object)
+        return response
+
+    def form_invalid(self, form):
+        print("Form inválido:", form.errors)
+        return super().form_invalid(form)
+
+class ContactLogView(ListView):
+    model = ContactLog
+    template_name = 'info_app/contactlog_list.html'
+    context_object_name = 'contactlog'
 

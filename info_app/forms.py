@@ -1,5 +1,7 @@
 from django import forms
-from .models import Person
+from django.db.models import ForeignKey, DateTimeField, TextField
+from django.db import models
+from .models import Person, ContactLog
 from django import forms
 
 class PersonForm(forms.ModelForm):
@@ -45,3 +47,19 @@ class FeedbackForm(forms.Form):
     email = forms.EmailField(label='E-mail')
     comentario = forms.CharField(label='Comentário', widget=forms.Textarea)
     satisfacao = forms.ChoiceField(label='Satisfação', choices=feedback)
+
+
+class ContactLogForm(forms.ModelForm):
+    class Meta:
+        model = ContactLog
+        fields = [
+            'person',
+            # 'timestamp', não está funcionando no forms por não ser editavel
+            'message'
+        ]
+
+        labels = {
+            'person': 'Contato',
+            'timestamp': 'Horário de envio',
+            'message': 'Mensagem'
+        }

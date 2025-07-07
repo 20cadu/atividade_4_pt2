@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path
-from info_app.views import WelcomeView, GoodbyeView, TimeView, GreetView, AgeCategoryView, SumView1, AboutTemplateView, PersonListView, PersonCreateView, PersonUpdateView, feedback_view
-
+from info_app.views import WelcomeView, GoodbyeView, TimeView, GreetView, AgeCategoryView, SumView1, AboutTemplateView, \
+    PersonListView, PersonCreateView, PersonUpdateView, feedback_view, ContactLogView, ContactLogCreateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,4 +16,6 @@ urlpatterns = [
     path('people-new/', PersonCreateView.as_view(), name='people-new'),
     path('people-edit/<int:pk>', PersonUpdateView.as_view(), name='people-edit'),
     path('feedback/', feedback_view, name='feedback'),
+    path('contact-log/new/', ContactLogCreateView.as_view(), name='contactlog-new'),
+    path('contact-log/list/', ContactLogView.as_view(), name='contactlog-list')
 ]

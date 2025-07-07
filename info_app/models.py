@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import ForeignKey, DateTimeField, TextField
 from django.forms import CharField
 
 
@@ -17,3 +18,8 @@ class Person(models.Model):
 
     def __str__(self):
         return self.name
+
+class ContactLog(models.Model):
+    person = ForeignKey(Person, on_delete=models.CASCADE)
+    timestamp = DateTimeField(auto_now_add=True)
+    message = TextField()
